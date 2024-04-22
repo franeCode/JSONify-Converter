@@ -17,20 +17,32 @@ def add_cors_headers(response):
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-def convert_to_json(file_path, header_rows=1, footer_rows=0, encoding='utf-8'):
-
+def convert_to_json(file_path, header_rows=1, footer_rows=0, encodings=None):
     _, file_extension = os.path.splitext(file_path)
     if file_extension.lower() == '.csv':
-        df = pd.read_csv(file_path, skiprows=header_rows-1, skipfooter=footer_rows, encoding=encoding)
-    elif file_extension.lower() in ['.xls', '.xlsx']:
-        df = pd.read_excel(file_path, skiprows=header_rows-1, skipfooter=footer_rows, encoding=encoding)
+        for encoding in encodings:
+            try:
+                df = pd.read_csv(file_path, skiprows=header_rows-1, skipfooter=footer_rows, encoding=encoding)
+                break  # Break out of the loop if successful
+            except UnicodeDecodeError:
+                continue  # Try the next encoding if decoding fails
+        else:
+            return None, "Unable to decode CSV file with any encoding"
+    # elif file_extension.lower() in ['.xls', '.xlsx']:
+    #     for encoding in encodings:
+    #         try:
+    #             df = pd.read_excel(file_path, skiprows=header_rows-1, skipfooter=footer_rows, encoding=encoding)
+    #             break  # Break out of the loop if successful
+    #         except UnicodeDecodeError:
+    #             continue  # Try the next encoding if decoding fails
+    #     else:
+    #         return None, "Unable to decode Excel file with any encoding"
     else:
         return None, "Unsupported file format"
 
     json_data = df.to_dict(orient='records')
 
     return json_data, None
-
 
 @app.route('/convert', methods=['POST'])
 def convert_file():
@@ -48,7 +60,9 @@ def convert_file():
         filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filename)
 
-        json_data, error = convert_to_json(filename, header_rows, footer_rows)
+        encodings = ['utf-8', 'latin1', 'iso-8859-1', 'cp1252']  # List of encodings to try
+
+        json_data, error = convert_to_json(filename, header_rows, footer_rows, encodings)
         if error:
             return jsonify({'error': error}), 400
 
