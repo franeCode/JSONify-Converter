@@ -4,8 +4,7 @@ import axios from 'axios';
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
-  // const [headerRows, setHeaderRows] = useState<number>(0);
-  // const [footerRows, setFooterRows] = useState<number>(0);
+  const [converting, setConverting] = useState(false);
   const [jsonData, setJsonData] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,10 +16,9 @@ function App() {
 
   const handleConvert = async () => {
     if (file) {
+      setConverting(true);
       const formData = new FormData();
       formData.append('file', file);
-      // formData.append('headerRows', String(headerRows));
-      // formData.append('footerRows', String(footerRows));
 
       try {
         const response = await axios.post('http://localhost:5000/convert', formData, {
@@ -32,7 +30,9 @@ function App() {
         setJsonData(response.data.data);
       } catch (error) {
         console.error('Error converting file:', error);
-      }
+      } setTimeout(() => {
+        setConverting(false); 
+      }, 3000);
     }
   };
 
@@ -77,16 +77,46 @@ function App() {
   return (
     <>
       <div>
-        <div className='flex flex-col gap-4 border border-blue-300 rounded-md p-6'>
-          <input 
-            type="file" 
-            onChange={handleFileChange}
-            className="appearance-none border border-gray-300 rounded py-2 px-4 leading-tight focus:outline-none focus:border-blue-500"
+      <div className='flex flex-col gap-4 border border-blue-300 rounded-md p-12'>
+        {!jsonData && (
+          <div className="relative">
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-          <button onClick={handleConvert}>Convert to JSON</button>
-          <button onClick={handleDownload} disabled={!jsonData}>Download JSON</button>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Choose File
+            </button>
+          </div>
+        )}
+        {file && (
+          <p className="mt-2">{file.name}</p>
+        )}
+        
+          <button onClick={handleConvert} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          {converting ? "Converting..." : "Convert to JSON"}
+          </button>
+          {jsonData && (
+            <button onClick={handleDownload} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              Download JSON
+            </button>
+          )}
+      </div>
+      {jsonData && (
+        <div className="mt-8">
+        <p className="text-lg font-bold">Converted JSON:</p>
+        <div className="mt-2 text-start overflow-x-auto p-4 rounded-md border border-gray-300" style={{ maxHeight: '300px' }}>
+          <pre>
+            {jsonData}
+          </pre>
         </div>
       </div>
+      
+      )}
+    </div>
     </>
   )
 }
