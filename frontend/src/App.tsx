@@ -4,8 +4,8 @@ import axios from 'axios';
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
-  const [headerRows, setHeaderRows] = useState<number>(0);
-  const [footerRows, setFooterRows] = useState<number>(0);
+  // const [headerRows, setHeaderRows] = useState<number>(0);
+  // const [footerRows, setFooterRows] = useState<number>(0);
   const [jsonData, setJsonData] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,8 +19,8 @@ function App() {
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('headerRows', String(headerRows));
-      formData.append('footerRows', String(footerRows));
+      // formData.append('headerRows', String(headerRows));
+      // formData.append('footerRows', String(footerRows));
 
       try {
         const response = await axios.post('http://localhost:5000/convert', formData, {
@@ -77,24 +77,16 @@ function App() {
   return (
     <>
       <div>
-        <div>
-          Header Rows:
-          <input type="number" value={headerRows} onChange={(e) => setHeaderRows(Number(e.target.value))} />
+        <div className='flex flex-col gap-4 border border-blue-300 rounded-md p-6'>
+          <input 
+            type="file" 
+            onChange={handleFileChange}
+            className="appearance-none border border-gray-300 rounded py-2 px-4 leading-tight focus:outline-none focus:border-blue-500"
+            />
+          <button onClick={handleConvert}>Convert to JSON</button>
+          <button onClick={handleDownload} disabled={!jsonData}>Download JSON</button>
         </div>
-        <div>
-          Footer Rows:
-          <input type="number" value={footerRows} onChange={(e) => setFooterRows(Number(e.target.value))} />
-        </div>
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={handleConvert}>Convert to JSON</button>
-        <button onClick={handleDownload} disabled={!jsonData}>Download JSON</button>
       </div>
-      {/* {jsonData && (
-        <div>
-          <h2>Converted JSON Data:</h2>
-          <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-        </div>
-      )} */}
     </>
   )
 }
