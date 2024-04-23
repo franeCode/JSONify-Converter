@@ -23,18 +23,18 @@ def convert_to_json(file_path, header_rows=1, footer_rows=0, encodings=None):
         for encoding in encodings:
             try:
                 df = pd.read_csv(file_path, skiprows=header_rows-1, skipfooter=footer_rows, encoding=encoding)
-                break  # Break out of the loop if successful
+                break  
             except UnicodeDecodeError:
-                continue  # Try the next encoding if decoding fails
+                continue 
         else:
             return None, "Unable to decode CSV file with any encoding"
     # elif file_extension.lower() in ['.xls', '.xlsx']:
     #     for encoding in encodings:
     #         try:
     #             df = pd.read_excel(file_path, skiprows=header_rows-1, skipfooter=footer_rows, encoding=encoding)
-    #             break  # Break out of the loop if successful
+    #             break 
     #         except UnicodeDecodeError:
-    #             continue  # Try the next encoding if decoding fails
+    #             continue  
     #     else:
     #         return None, "Unable to decode Excel file with any encoding"
     else:
@@ -60,7 +60,7 @@ def convert_file():
         filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filename)
 
-        encodings = ['utf-8', 'latin1', 'iso-8859-1', 'cp1252']  # List of encodings to try
+        encodings = ['utf-8', 'latin1', 'iso-8859-1', 'cp1252']  
 
         json_data, error = convert_to_json(filename, header_rows, footer_rows, encodings)
         if error:
