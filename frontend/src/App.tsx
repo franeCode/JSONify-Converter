@@ -130,14 +130,15 @@ function App() {
 
   return (
     <>
-      <div className='w-screen h-screen flex flex-col' 
+      <div className='w-screen h-screen overflow-auto flex flex-col' 
       style={{ 
               // background: 'rgb(0,212,255)'
-              background: 'radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(9,93,121,1) 47%, rgba(26,32,33,1) 100%)' }}
+              background: 'radial-gradient(circle, rgba(101, 110, 146, 1) 0%, rgba(9,93,121,1) 47%, rgba(17, 42, 70, 1) 100%)' }}
       // style={{ background: 'background: linear-gradient(to left, #2F3061, #087E8B 25%, #087E8B 75%, #2F3061 100%)'}}
       >
-        <div>
-          <h1 className='text-4xl text-white font-bold text-center p-16'>Transform Your CSV Data into JSON Format with Ease</h1>
+        <div className='text-4xl font-bold text-center p-16'>
+          <h1 className='text-[#55F595]'>Transform Your CSV Data</h1> 
+          <p className='text-gray-200'>into JSON Format with Ease</p>
         </div>
         <div className='flex flex-col justify-center items-center relative'>
           <div className='lg:w-[50%] shadow-md rounded-md bg-gray-800 p-10'>
@@ -150,7 +151,7 @@ function App() {
               onDrop={handleDrop}
             >
               <div className="w-full flex flex-col justify-center items-center">
-                <SlCloudDownload className='text-4xl' />
+                <SlCloudDownload className='text-4xl text-[#55F595]' />
                 <p className="mt-2 text-gray-300">Drag & Drop file here</p>
                 <br></br>
                 <span className="mt-2 text-gray-300">or</span>
@@ -162,7 +163,7 @@ function App() {
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
                 <button
-                  className="flex flex-row justify-center align-center gap-2 bg-gray-500 hover:bg-blue-700 text-gray-200 font-bold rounded-md"
+                  className="flex flex-row justify-center align-center gap-2 bg-gray-500 hover:bg-blue-700 text-gray-200 font-bold rounded-md px-2"
                 >
                   <CiLink className='text-3xl' />
                   <span>Choose File</span>
@@ -182,7 +183,7 @@ function App() {
             <button
               onClick={handleConvert}
               disabled={converting || converted || !file}
-              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
+              className={`bg-gray-800 hover:bg-gray-700 text-[#55F595] font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
             >
               {converting ? "Converting..." : "Convert to JSON"}
             </button>
@@ -190,7 +191,7 @@ function App() {
               <button
                 onClick={handleDownload}
                 disabled={converting && !jsonData}
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                className="text-[#55F595] bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
               >
                 Download JSON
               </button>
@@ -216,7 +217,7 @@ function App() {
         </div>
             <button 
               onClick={showData}
-              className='absolute -bottom-4 w-[10%] px-4 py-4 rounded-r-3xl rounded-l-3xl bg-gray-700 border-none'>
+              className='absolute -bottom-4 w-[10%] px-4 py-4 rounded-r-3xl rounded-l-3xl bg-gray-800 border-none'>
               <span className='w-full block h-1 border-b-2 border-gray-500 mx-auto'></span>
               <span className='w-5/6 block h-1 border-b-2 border-gray-500 mx-auto'></span>
               <span className='w-4/6 block h-1 border-b-2 border-gray-500 mx-auto -mb-2'></span>
