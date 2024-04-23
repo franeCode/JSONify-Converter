@@ -118,7 +118,6 @@ function App() {
   };
 
   const handleFiles = (files: File[]) => {
-    // Handle dropped files (e.g., read them or upload them)
     if (files.length > 0) {
       setFile(files[0]);
       setConverted(false);
@@ -141,7 +140,7 @@ function App() {
           <h1 className='text-4xl text-white font-bold text-center p-16'>Transform Your CSV Data into JSON Format with Ease</h1>
         </div>
         <div className='flex flex-col justify-center items-center relative'>
-          <div className='lg:w-[50%] shadow-md rounded-md bg-gray-700 p-10'>
+          <div className='lg:w-[50%] shadow-md rounded-md bg-gray-800 p-10'>
           <div className='flex flex-col justify-center gap-4 border border-dashed border-gray-400 rounded-md p-12'>
             <div
               className={`relative flex flex-col justify-center items-center ${dragging ? 'border ' : ''}`}
@@ -174,10 +173,10 @@ function App() {
             <div className="w-full mt-4 flex flex-row justify-between">
             {file ?
              (
-              <p className="mt-2">{file.name}</p>
+              <p className="mt-2 text-gray-300">{file.name}</p>
             ):
             (
-              <p className="mt-2">No file selected</p>
+              <p className="mt-2 text-gray-300">No file selected</p>
             )}
 
             <button
@@ -200,14 +199,14 @@ function App() {
           
           {open && jsonData && !converting && (
             <div className={`mt-8 relative overflow-hidden transition-all duration-300 ${open ? 'h-auto opacity-100' : 'h-0 opacity-0'}`}>
-              <p className="text-lg font-bold">Converted JSON:</p>
+              <p className="text-lg font-bold text-gray-300">Converted JSON:</p>
               <div className="mt-2 text-start overflow-x-auto p-4 rounded-md border border-gray-300 relative" style={{ maxHeight: '300px' }}>
-                <pre>
+                <pre className='text-gray-300'>
                   {jsonData}
                 </pre>
                 <button
                   onClick={handleCopy}
-                  className="absolute top-4 right-4 py-2 px-4 rounded bg-transparent transform border-none hover:scale-115 transition-transform duration-300"
+                  className="absolute top-4 right-4 text-gray-300 py-2 px-4 rounded bg-transparent transform border-none hover:scale-115 transition-transform duration-300"
                 >
                   <LuCopy />
                 </button>
