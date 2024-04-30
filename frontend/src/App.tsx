@@ -139,7 +139,7 @@ function App() {
       // style={{ background: 'background: linear-gradient(to left, #2F3061, #087E8B 25%, #087E8B 75%, #2F3061 100%)'}}
 >
         <div>
-          <img className='w-[4rem] fixed top-10 left-10' src={logo} alt="logo" />
+          <img className='w-[3rem] md:w-[4rem] fixed top-10 left-10' src={logo} alt="logo" />
         </div>
         <Header />
         <Converter

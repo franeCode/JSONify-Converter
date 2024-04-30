@@ -25,7 +25,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
     return (
       <div className="pb-16">
         <div className='flex flex-col justify-center items-center relative'>
-          <div className='lg:w-[50%] drop-shadow-xl rounded-md bg-gray-800 p-10'>
+          <div className='w-[80%] lg:w-[50%] drop-shadow-xl rounded-md bg-gray-800 p-10'>
             <div className='flex flex-col justify-center gap-4 border border-dashed border-gray-400 rounded-md p-12'>
               <div
                 className={`relative flex flex-col justify-center items-center ${dragging ? 'border ' : ''}`}
@@ -77,7 +77,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
                   disabled={converting && !jsonData}
                   className="text-[#00FF8C] bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                 >
-                  Download JSON
+                  Download 
                 </button>
               )}
             </div>
