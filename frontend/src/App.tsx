@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { LuCopy } from "react-icons/lu";
-import { SlCloudDownload } from "react-icons/sl";
-import { CiLink } from "react-icons/ci";
+import { Header } from './components/Header';
+import { Converter } from './components/Converter';
+import { Footer } from './components/Footer';
+import logo from './assets/img/logo.svg';
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
@@ -130,99 +131,36 @@ function App() {
 
   return (
     <>
-      <div className='w-screen h-screen overflow-auto flex flex-col' 
-      style={{ 
-              // background: 'rgb(0,212,255)'
-              background: 'radial-gradient(circle, rgba(101, 110, 146, 1) 0%, rgba(9,93,121,1) 47%, rgba(17, 42, 70, 1) 100%)' }}
+      <div className='w-screen bg-[#FCFCF9] h-screen overflow-auto flex flex-col py-12 relative'
+        style={{
+          // background: '#FCFCF9'
+          // background: 'radial-gradient(circle, rgba(101, 110, 146, 1) 0%, rgba(9,93,121,1) 47%, rgba(17, 42, 70, 1) 100%)' 
+        }}
       // style={{ background: 'background: linear-gradient(to left, #2F3061, #087E8B 25%, #087E8B 75%, #2F3061 100%)'}}
-      >
-        <div className='text-4xl font-bold text-center p-16'>
-          <h1 className='text-[#55F595]'>Transform Your CSV Data</h1> 
-          <p className='text-gray-200'>into JSON Format with Ease</p>
+>
+        <div>
+          <img className='w-[4rem] fixed top-10 left-10' src={logo} alt="logo" />
         </div>
-        <div className='flex flex-col justify-center items-center relative'>
-          <div className='lg:w-[50%] shadow-md rounded-md bg-gray-800 p-10'>
-          <div className='flex flex-col justify-center gap-4 border border-dashed border-gray-400 rounded-md p-12'>
-            <div
-              className={`relative flex flex-col justify-center items-center ${dragging ? 'border ' : ''}`}
-              onDragOver={handleDragOver}
-              onDragEnter={handleDragEnter}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-            >
-              <div className="w-full flex flex-col justify-center items-center">
-                <SlCloudDownload className='text-4xl text-[#55F595]' />
-                <p className="mt-2 text-gray-300">Drag & Drop file here</p>
-                <br></br>
-                <span className="mt-2 text-gray-300">or</span>
-              </div>
-              <div className="relative w-full flex justify-center items-center py-2">
-                <input
-                  type="file"
-                  onChange={handleFileChange}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                />
-                <button
-                  className="flex flex-row justify-center align-center gap-2 bg-gray-500 hover:bg-blue-700 text-gray-200 font-bold rounded-md px-2"
-                >
-                  <CiLink className='text-3xl' />
-                  <span>Choose File</span>
-                </button>
-              </div>
-            </div>
-            </div>
-            <div className="w-full mt-4 flex flex-row justify-between">
-            {file ?
-             (
-              <p className="mt-2 text-gray-300">{file.name}</p>
-            ):
-            (
-              <p className="mt-2 text-gray-300">No file selected</p>
-            )}
-
-            <button
-              onClick={handleConvert}
-              disabled={converting || converted || !file}
-              className={`bg-gray-800 hover:bg-gray-700 text-[#55F595] font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
-            >
-              {converting ? "Converting..." : "Convert to JSON"}
-            </button>
-            {jsonData && converted && (
-              <button
-                onClick={handleDownload}
-                disabled={converting && !jsonData}
-                className="text-[#55F595] bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Download JSON
-              </button>
-            )}
-          </div>
-          
-          {open && jsonData && !converting && (
-            <div className={`mt-8 relative overflow-hidden transition-all duration-300 ${open ? 'h-auto opacity-100' : 'h-0 opacity-0'}`}>
-              <p className="text-lg font-bold text-gray-300">Converted JSON:</p>
-              <div className="mt-2 text-start overflow-x-auto p-4 rounded-md border border-gray-300 relative" style={{ maxHeight: '300px' }}>
-                <pre className='text-gray-300'>
-                  {jsonData}
-                </pre>
-                <button
-                  onClick={handleCopy}
-                  className="absolute top-4 right-4 text-gray-300 py-2 px-4 rounded bg-transparent transform border-none hover:scale-115 transition-transform duration-300"
-                >
-                  <LuCopy />
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-            <button 
-              onClick={showData}
-              className='absolute -bottom-4 w-[10%] px-4 py-4 rounded-r-3xl rounded-l-3xl bg-gray-800 border-none'>
-              <span className='w-full block h-1 border-b-2 border-gray-500 mx-auto'></span>
-              <span className='w-5/6 block h-1 border-b-2 border-gray-500 mx-auto'></span>
-              <span className='w-4/6 block h-1 border-b-2 border-gray-500 mx-auto -mb-2'></span>
-            </button>
-        </div>
+        <Header />
+        <Converter
+          converting={converting}
+          jsonData={jsonData}
+          converted={converted}
+          file={file}
+          handleFileChange={handleFileChange}
+          handleConvert={handleConvert}
+          handleDownload={handleDownload}
+          handleCopy={handleCopy}
+          handleDragOver={handleDragOver}
+          handleDragEnter={handleDragEnter}
+          handleDragLeave={handleDragLeave}
+          handleDrop={handleDrop}
+          handleFiles={handleFiles}
+          dragging={dragging}
+          open={open}
+          showData={showData}
+          />
+          <Footer />
       </div>
     </>
   )
