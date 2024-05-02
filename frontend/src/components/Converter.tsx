@@ -23,10 +23,10 @@ type ConverterProps = {
 
 export function Converter({ file, jsonData, converting, converted, open, dragging, handleDragOver, handleDragLeave, handleDragEnter, handleDrop, handleConvert, handleDownload, handleFileChange, handleCopy, showData }: ConverterProps) {
     return (
-      <div className="pb-16">
+      <div className="pb-16 mt-6">
         <div className='flex flex-col justify-center items-center relative'>
-          <div className='w-[80%] lg:w-[50%] drop-shadow-xl rounded-md bg-gray-800 p-10'>
-            <div className='flex flex-col justify-center gap-4 border border-dashed border-gray-400 rounded-md p-12'>
+          <div className='w-[80%] lg:w-[50%] rounded-md bg-gray-800 p-10'>
+            <div className='flex flex-col justify-center gap-4 border border-dashed border-gray-400 rounded-md p-6 md:p-12'>
               <div
                 className={`relative flex flex-col justify-center items-center ${dragging ? 'border ' : ''}`}
                 onDragOver={handleDragOver}
@@ -36,7 +36,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
               >
                 <div className="w-full flex flex-col justify-center items-center">
                   <SlCloudDownload className='text-4xl text-[#FFFFFF]' />
-                  <p className="mt-2 text-gray-200">Drag & Drop file here</p>
+                  <p className="mt-2 text-[1rem] text-center text-gray-200">Drag & Drop file here</p>
                   <br></br>
                   <span className="mt-2 text-gray-400 py-2">or</span>
                 </div>
@@ -47,10 +47,10 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                   <button
-                    className="flex flex-row justify-center items-center gap-1 bg-gray-500 hover:bg-blue-700 text-gray-200 font-bold rounded-md cursor-pointer px-2"
+                    className="flex flex-row justify-center items-center gap-1 bg-gray-500 hover:bg-blue-700 text-gray-200 font-bold rounded-md cursor-pointer px-6 lg:px-2"
                   >
-                    <CiLink className='text-3xl' />
-                    <span>Choose File</span>
+                    <CiLink className='text-[2rem] md:text-3xl' />
+                    <span className="text-sm md:text-xl">Choose File</span>
                   </button>
                 </div>
               </div>
@@ -69,7 +69,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
                 disabled={converting || converted || !file}
                 className={`bg-gray-800 hover:bg-gray-700 text-[#00FF8C] font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
               >
-                {converting ? "Converting..." : "Convert to JSON"}
+                {converting ? "Converting..." : "Convert"}
               </button>
               {jsonData && converted && (
                 <button
