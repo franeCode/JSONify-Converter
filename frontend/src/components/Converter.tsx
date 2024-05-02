@@ -47,15 +47,15 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                   <button
-                    className="flex flex-row justify-center items-center gap-1 bg-gray-500 hover:bg-blue-700 text-gray-200 font-bold rounded-md cursor-pointer px-6 lg:px-2"
+                    className="flex flex-row justify-center items-center gap-1 bg-gray-500 hover:bg-blue-700 text-gray-200 font-bold rounded-md cursor-pointer px-4 lg:px-2"
                   >
-                    <CiLink className='text-[2rem] md:text-3xl' />
-                    <span className="text-sm md:text-xl">Choose File</span>
+                    <CiLink className='text-[1.5rem] md:text-3xl' />
+                    <span className="text-sm md:text-lg lg:text-xl">Choose File</span>
                   </button>
                 </div>
               </div>
             </div>
-            <div className="w-full mt-4 flex flex-row justify-between">
+            <div className="w-full text-[0.8em] md:text-base mt-4 flex flex-row justify-between">
               {file ?
                 (
                   <p className="mt-2 text-gray-300">{file.name}</p>
@@ -67,7 +67,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
               <button
                 onClick={handleConvert}
                 disabled={converting || converted || !file}
-                className={`bg-gray-800 hover:bg-gray-700 text-[#00FF8C] font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
+                className={`bg-gray-800 hover:bg-gray-700 text-[0.8em] md:text-base text-white font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
               >
                 {converting ? "Converting..." : "Convert"}
               </button>
@@ -75,7 +75,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
                 <button
                   onClick={handleDownload}
                   disabled={converting && !jsonData}
-                  className="text-[#00FF8C] bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-gray-800 text-[0.8em] md:text-base hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                 >
                   Download 
                 </button>
