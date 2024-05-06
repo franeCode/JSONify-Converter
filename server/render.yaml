@@ -1,3 +1,8 @@
-env:
-  - key: UPLOAD_FOLDER
-    value: "server/uploads"
+services:
+  - name: flask-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -b 0.0.0.0:$PORT app:app
+    envVars:
+      - key: UPLOAD_FOLDER
+        value: "server/uploads"
