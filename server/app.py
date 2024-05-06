@@ -7,6 +7,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 
+
 @app.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -74,4 +75,4 @@ def convert_file():
         return jsonify({'data': formatted_json_data}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
