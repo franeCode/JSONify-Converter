@@ -15,7 +15,7 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'server/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def convert_to_json(file_path, header_rows=1, footer_rows=0, encodings=None):
