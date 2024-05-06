@@ -26,9 +26,9 @@ function App() {
       setConverting(true);
       const formData = new FormData();
       formData.append('file', file);
-
+      // https://jsonify-converter.onrender.com/convert'
       try {
-        const response = await axios.post('https://jsonify-converter.onrender.com/convert', formData, {
+        const response = await axios.post('http://localhost:5000/convert', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -131,15 +131,9 @@ function App() {
 
   return (
     <>
-      <div className='w-screen bg-[#FCFCF9] h-screen overflow-auto flex flex-col py-12 relative'
-        style={{
-          // background: '#FCFCF9'
-          // background: 'radial-gradient(circle, rgba(101, 110, 146, 1) 0%, rgba(9,93,121,1) 47%, rgba(17, 42, 70, 1) 100%)' 
-        }}
-      // style={{ background: 'background: linear-gradient(to left, #2F3061, #087E8B 25%, #087E8B 75%, #2F3061 100%)'}}
->
-        <div className='w-full bg-[#FCFCF9] lg:bg-transparent z-10 fixed top-10 left-10'>
-          <img className='w-[3rem] md:w-[4rem]' src={logo} alt="logo" />
+      <div className='w-screen bg-[#FCFCF9] h-screen overflow-auto flex flex-col py-12 relative'>
+        <div className='w-full h-[6rem] bg-[#FCFCF9] lg:bg-transparent z-10 fixed top-0 left-8'>
+          <img className='w-[3rem] md:w-[4rem] mt-4' src={logo} alt="logo" />
         </div>
         <Header />
         <Converter

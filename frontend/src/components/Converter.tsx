@@ -23,7 +23,7 @@ type ConverterProps = {
 
 export function Converter({ file, jsonData, converting, converted, open, dragging, handleDragOver, handleDragLeave, handleDragEnter, handleDrop, handleConvert, handleDownload, handleFileChange, handleCopy, showData }: ConverterProps) {
     return (
-      <div className="pb-16 mt-6">
+      <div className="pb-16">
         <div className='flex flex-col justify-center items-center relative'>
           <div className='w-[80%] lg:w-[50%] rounded-md bg-gray-800 p-10'>
             <div className='flex flex-col justify-center gap-4 border border-dashed border-gray-400 rounded-md p-6 md:p-12'>
@@ -67,7 +67,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
               <button
                 onClick={handleConvert}
                 disabled={converting || converted || !file}
-                className={`bg-gray-800 hover:bg-gray-700 text-[0.8em] md:text-base text-white font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
+                className={`bg-gray-800 hover:bg-gray-700 text-[1em] md:text-base text-white font-bold py-2 px-4 rounded ${converted ? 'hidden' : ''}`}
               >
                 {converting ? "Converting..." : "Convert"}
               </button>
@@ -75,7 +75,7 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
                 <button
                   onClick={handleDownload}
                   disabled={converting && !jsonData}
-                  className="bg-gray-800 text-[0.8em] md:text-base hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-gray-800 text-[1em] md:text-base hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                 >
                   Download 
                 </button>
@@ -84,16 +84,16 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
 
             {open && jsonData && !converting && converted && (
               <div className={`mt-8 relative transition-max-height duration-300 ease-out ${open ? 'max-h-300 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <p className="text-lg font-bold text-gray-300">Converted JSON:</p>
+                <p className="text-sm md:text-lg font-bold text-gray-300">Converted JSON data:</p>
                 <div className="mt-2 text-start overflow-x-auto p-4 rounded-md border border-gray-300" style={{ maxHeight: '200px' }}>
-                  <pre className='text-gray-300'>
+                  <pre className='text-gray-300 text-xs md:text-base'>
                     {jsonData}
                   </pre>
                   <button
                     onClick={handleCopy}
                     className="absolute top-10 right-0 text-gray-300 py-2 px-4 rounded bg-transparent transform border-none hover:scale-115 transition-transform duration-300"
                   >
-                    <LuCopy className='text-2xl' />
+                    <LuCopy className='text-lg md:text-2xl' />
                   </button>
                 </div>
               </div>
