@@ -7,7 +7,6 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-
 @app.after_request
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -17,6 +16,11 @@ def add_cors_headers(response):
 
 UPLOAD_FOLDER = 'server/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def ensure_uploads_folder():
+    uploads_folder = app.config['UPLOAD_FOLDER']
+    if not os.path.exists(uploads_folder):
+        os.makedirs(uploads_folder)
 
 def convert_to_json(file_path, header_rows=1, footer_rows=0, encodings=None):
     _, file_extension = os.path.splitext(file_path)
@@ -47,6 +51,7 @@ def convert_to_json(file_path, header_rows=1, footer_rows=0, encodings=None):
 
 @app.route('/convert', methods=['POST'])
 def convert_file():
+    ensure_uploads_folder()  # Ensure that the uploads folder exists
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
 
