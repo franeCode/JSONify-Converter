@@ -36,9 +36,9 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
               >
                 <div className="w-full flex flex-col justify-center items-center">
                   <SlCloudDownload className='text-4xl text-[#FFFFFF]' />
-                  <p className="mt-2 text-[1rem] text-center text-gray-200">Drag & Drop file here</p>
+                  <p className="mt-2 text-[1rem] text-center text-gray-200">Drag & Drop</p>
                   <br></br>
-                  <span className="mt-2 text-gray-400 py-2">or</span>
+                  <span className="mt-2 text-gray-400 py-1">or</span>
                 </div>
                 <div className="relative w-full flex justify-center items-center pt-3">
                   <input
