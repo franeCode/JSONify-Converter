@@ -13,6 +13,7 @@ function App() {
   const [dragging, setDragging] = useState(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState<string | ''>('');
+  const [error, setError] = useState<string | ''>('' as string);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
@@ -42,7 +43,7 @@ function App() {
         }, 3000);
 
       } catch (error) {
-        console.error('Error converting file:', error);
+        setError('Error converting file, please check the file and try again.');
         setConverting(false);
       }
     }
@@ -78,9 +79,10 @@ function App() {
         link.click();
 
         window.URL.revokeObjectURL(url);
+
         setMessage('File downloaded successfully!');
       } catch (error) {
-        console.error('Error parsing JSON:', error);
+        setError('Error downloading JSON data');
         setMessage('Error downloading JSON data');
       }
     }
@@ -92,8 +94,8 @@ function App() {
         .then(() => {
           setMessage("JSON data copied to clipboard!");
         })
-        .catch((error) => {
-          console.error("Error copying JSON data:", error);
+        .catch(() => {
+          setError("Error copying JSON data to clipboard");
         });
     }
   };
@@ -131,6 +133,15 @@ function App() {
     setOpen(!open);
   };
 
+  const reset = () => {
+    setFile(null);
+    setJsonData(null);
+    setConverted(false);
+    setOpen(false);
+    setMessage('');
+    setError('');
+  }
+
   return (
     <>
       <div className='w-screen bg-[#FCFCF9] h-screen overflow-auto flex flex-col py-12 relative'>
@@ -156,8 +167,10 @@ function App() {
           open={open}
           showData={showData}
           message={message}
-          />
-          <Footer />
+          reset={reset}
+          error={error}
+        />
+        <Footer />
       </div>
     </>
   )
