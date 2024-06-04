@@ -26,7 +26,7 @@ type ConverterProps = {
 
 export function Converter({ file, jsonData, converting, converted, open, dragging, handleDragOver, handleDragLeave, handleDragEnter, handleDrop, handleConvert, handleDownload, handleFileChange, handleCopy, showData, reset, message, error }: ConverterProps) {
   return (
-    <div className="pb-16">
+    <div className="pb-16 lg:mt-10">
       <div className='flex flex-col justify-center items-center relative'>
         <div className='w-[80%] lg:w-[50%] rounded-md bg-gray-800 p-10'>
           <div className='flex flex-col justify-center gap-4 border border-dashed border-gray-400 rounded-md p-6 md:p-12'>
