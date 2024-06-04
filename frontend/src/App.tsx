@@ -34,7 +34,6 @@ function App() {
             'Content-Type': 'multipart/form-data'
           }
         });
-        console.log(response.data.data);
         setTimeout(() => {
           setJsonData(response.data.data);
           setConverting(false);
@@ -91,7 +90,7 @@ function App() {
     if (jsonData) {
       navigator.clipboard.writeText(jsonData)
         .then(() => {
-          alert("JSON data copied to clipboard!");
+          setMessage("JSON data copied to clipboard!");
         })
         .catch((error) => {
           console.error("Error copying JSON data:", error);
