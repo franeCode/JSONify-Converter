@@ -51,7 +51,7 @@ def convert_to_json(file_path, header_rows=1, footer_rows=0, encodings=None):
 
 @app.route('/convert', methods=['POST'])
 def convert_file():
-    ensure_uploads_folder()  # Ensure that the uploads folder exists
+    ensure_uploads_folder()  
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
 
@@ -77,7 +77,8 @@ def convert_file():
         except Exception as e:
             return jsonify({'error': f'Error formatting JSON data: {str(e)}'}), 500
 
-        return jsonify({'data': formatted_json_data}), 200
+        success_message = 'File converted successfully'
+        return jsonify({'data': formatted_json_data, 'message': success_message}), 200
 
 if __name__ == '__main__':
     app.run()

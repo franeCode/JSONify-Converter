@@ -12,6 +12,7 @@ function App() {
   const [converted, setConverted] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<string | ''>('');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
@@ -38,6 +39,7 @@ function App() {
           setJsonData(response.data.data);
           setConverting(false);
           setConverted(true);
+          setMessage('File is converted successfully!');
         }, 3000);
 
       } catch (error) {
@@ -77,9 +79,10 @@ function App() {
         link.click();
 
         window.URL.revokeObjectURL(url);
+        setMessage('File downloaded successfully!');
       } catch (error) {
         console.error('Error parsing JSON:', error);
-        // Handle error
+        setMessage('Error downloading JSON data');
       }
     }
   };
@@ -153,6 +156,7 @@ function App() {
           dragging={dragging}
           open={open}
           showData={showData}
+          message={message}
           />
           <Footer />
       </div>

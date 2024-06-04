@@ -19,9 +19,10 @@ type ConverterProps = {
     handleConvert: () => void;
     handleDownload: () => void;
     handleCopy: () => void;
+    message: string;
 };
 
-export function Converter({ file, jsonData, converting, converted, open, dragging, handleDragOver, handleDragLeave, handleDragEnter, handleDrop, handleConvert, handleDownload, handleFileChange, handleCopy, showData }: ConverterProps) {
+export function Converter({ file, jsonData, converting, converted, open, dragging, handleDragOver, handleDragLeave, handleDragEnter, handleDrop, handleConvert, handleDownload, handleFileChange, handleCopy, showData, message }: ConverterProps) {
     return (
       <div className="pb-16">
         <div className='flex flex-col justify-center items-center relative'>
@@ -80,7 +81,10 @@ export function Converter({ file, jsonData, converting, converted, open, draggin
                   Download 
                 </button>
               )}
+              
             </div>
+
+            <div className="text-center text-green-500">{message}</div>
 
             {open && jsonData && !converting && converted && (
               <div className={`mt-8 relative transition-max-height duration-300 ease-out ${open ? 'max-h-300 opacity-100' : 'max-h-0 opacity-0'}`}>
