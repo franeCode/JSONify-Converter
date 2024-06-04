@@ -31,7 +31,7 @@ Getting Started
         Start the frontend (React):
 
         cd frontend
-        npm start
+        npm run dev
 
         Start the backend (Python Flask):
 
